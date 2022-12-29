@@ -1,0 +1,18 @@
+#EVENT NAME
+name: on-push
+#WHEN THE EVENT SHOULD RUN
+on:
+  push:
+    branch:
+      - "**" #This will run on all branches, and must be quoted to be handled by yaml.
+#WHEN JOBS TO EXECUTE
+jobs:
+
+  build_and_test:
+    runs_on: ububtu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+
+
+#WHAT STEPS WITHIN EACH JOB

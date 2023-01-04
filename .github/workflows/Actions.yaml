@@ -30,6 +30,7 @@ jobs:
         run: mvn test
       #collect total duration and run bash file to get test results.
       - name: Collect build data
+        working-directory: webdriver_java
       # make sure to run even when previous step fails
         if: always()
         run: |

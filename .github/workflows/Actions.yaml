@@ -15,6 +15,9 @@ jobs:
       HEADLESS_CHROME: true
 
     steps:
+      #Start time
+      - name: set start time
+        run: echo "START_TIME=$(date +%s)" >> $GITHUB_ENV
       - uses: actions/checkout@v2
       #Install java
       - uses: actions/setup-java@v2
@@ -25,6 +28,11 @@ jobs:
       - name: Run tests with maven
         working-directory: webdriver_java
         run: mvn test
+      #collect total duration
+      - name: Collect build data
+      # make sure to run even when previous step fails
+        if: always()
+        run: expr $(date +%s) - $(START_TIME)
 
         # Handle remote server chrome driver
 

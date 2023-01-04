@@ -28,13 +28,15 @@ jobs:
       - name: Run tests with maven
         working-directory: webdriver_java
         run: mvn test
-      #collect total duration
+      #collect total duration and run bash file to get test results.
       - name: Collect build data
       # make sure to run even when previous step fails
         if: always()
-        run: expr $(date +%s) - $(START_TIME)
-
-        # Handle remote server chrome driver
+        run: |
+          echo "TOTAL_DURATION=$(expr $(date +%s) - ${START_TIME})"
+          ./resources/test_result_script.sh 
+          
+        
 
 
 #WHAT STEPS WITHIN EACH JOB

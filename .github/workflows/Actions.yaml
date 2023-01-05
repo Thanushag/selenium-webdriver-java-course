@@ -38,9 +38,5 @@ jobs:
         if: always()
         run: |
           echo "github_actions_total_duration $(expr $(date +%s) - ${START_TIME})" | curl --data-binary @- ${PUSHGATEWAY_URL}/metrics/job/github_actions
-          ./resources/test_result_script.sh 
-          
-        
-
-
+          ./resources/test_result_script.sh
 #WHAT STEPS WITHIN EACH JOB

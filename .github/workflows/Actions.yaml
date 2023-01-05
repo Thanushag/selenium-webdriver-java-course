@@ -31,10 +31,13 @@ jobs:
       #collect total duration and run bash file to get test results.
       - name: Collect build data
         working-directory: webdriver_java
+        #Adding pushgateway as env variable to make sure it available in all the places
+        env:
+          PUSHGATEWAY_URL: ${{ secrets.PUSHGATEWAY_URL }}
       # make sure to run even when previous step fails
         if: always()
         run: |
-          echo "github_actions_total_duration $(expr $(date +%s) - ${START_TIME})" | curl --data-binary @- ${{ secrets.PUSHGATEWAY_URL }}/metrics/job/github_actions
+          echo "github_actions_total_duration $(expr $(date +%s) - ${START_TIME})" | curl --data-binary @- ${PUSHGATEWAY_URL}/metrics/job/github_actions
           ./resources/test_result_script.sh 
           
         
